@@ -9,6 +9,7 @@ var stand1,stand2;
 var ball;
 var slingShot;
 var polygon_img;
+var score = 0
 function preload(){
   polygon_img=loadImage("polygon.png");
 }
@@ -66,7 +67,36 @@ function setup() {
 }
 function draw() {
   background(56,44,44); 
+  fill("purple")
+  textSize(35)
+  text ("score"+score,300,50)
+  block1.score();
+  block2.score();
+  block3.score();
+  block4.score();
+  block5.score();
+  block6.score();
+  block7.score();
+  block8.score();
+  block9.score();
+  block10.score();
+  block11.score();
+  block12.score();
+  block13.score();
+  block14.score();
+  block15.score();
+  block16.score();
  
+  blocks1.score();
+  blocks2.score();
+  blocks3.score();
+  blocks4.score();
+  blocks5.score();
+  blocks6.score();
+  blocks7.score();
+  blocks8.score();
+  blocks9.score();
+
   //Engine.update(engine);
   //text(mouseX + ',' + mouseY, 10, 15);
   textSize(20);
@@ -116,9 +146,15 @@ function draw() {
 
   slingShot.display();
 }
+
 function mouseDragged(){
   Matter.Body.setPosition(this.ball,{x:mouseX,y:mouseY});
 }
 function mouseReleased(){
   slingShot.fly();
+}
+function keyPressed(){
+  if(keyCode === 32){
+      slingShot.attach(this.ball);
+  }
 }
