@@ -3,15 +3,17 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
+var bg = "tower1/fdh.png";
 var engine, world;
 var holder,ball,ground;
 var stand1,stand2;
 var ball;
-var slingShot;
+var slingShot,backgroundImg;
 var polygon_img;
 var score = 0
 function preload(){
   polygon_img=loadImage("polygon.png");
+  getBackgroundImg()
 }
 function setup() {
   createCanvas(900,400);
@@ -66,7 +68,8 @@ function setup() {
 
 }
 function draw() {
-  background(56,44,44); 
+  if (backgroundImg)
+  background(backgroundImg); 
   fill("purple")
   textSize(35)
   text ("score"+score,300,50)
@@ -157,4 +160,21 @@ function keyPressed(){
   if(keyCode === 32){
       slingShot.attach(this.ball);
   }
+}
+async function getBackgroundImg(){
+  var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+  var responseJSON = await response.json();
+
+  var datetime = responseJSON.datetime;
+  var hour = datetime.slice(11,13);
+  
+  if(hour>=0600 && hour<=1900){
+      bg = "tower1/fdh.png";
+  }
+  else{
+      bg = "tower1/gg.png";
+  }
+
+  backgroundImg = loadImage(bg);
+  console.log(backgroundImg);
 }
